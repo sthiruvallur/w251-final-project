@@ -1,0 +1,27 @@
+FROM w251/keras:dev-tx2-4.3_b132 
+# FROM tensorflow
+
+# This is a container for Keras, opencv, and Jupyter
+# sudo docker 
+# sudo docker run --rm --name keras-cclin-v2 --privileged -p 8888:8888 -v /home:/home -d keras-cclin-v2
+
+RUN apt update
+RUN apt install -y curl git python3-opencv python3-pip vim-tiny libopencv-dev python3-matplotlib python3-pil libcanberra-gtk-module
+
+RUN pip3 install jupyter
+
+# ENV DEBIAN_FRONTEND=noninteractive
+RUN apt install -y python3-sklearn python3-scipy python3-pandas python3-seaborn
+RUN pip3 install keras
+
+WORKDIR /
+RUN mkdir -p notebooks
+WORKDIR /
+COPY handcapture.py .
+RUN mkdir -p SavedModel
+COPY SavedModel/ /SavedModel/
+
+EXPOSE 8888
+
+# Jupyter
+# CMD jupyter notebook  --no-browser --ip=0.0.0.0 --allow-root

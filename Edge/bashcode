@@ -1,0 +1,21 @@
+sudo docker stop hd
+sudo docker rm hd
+sudo docker build -t project -f Dockerfile.keras .
+sudo docker rmi $(sudo docker images -f "dangling=true" -q)
+
+# Don't use this one for now, more for jupyter stuff later
+sudo docker run -d --name hd -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --privileged -device=/dev/video0:/dev/video0 -p 8888:8888 project
+
+# Use these two
+sudo docker run -it --rm --name hd -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=$DISPLAY --privileged -device=/dev/video0:/dev/video0 -v /data/project/hands:/tmp/hands -p 8888:8888 project
+sudo docker exec -it hd bash
+
+
+# Debugging Related
+[<tf.Tensor 'Placeholder:0' shape=(None, 224, 224, 3) dtype=float32>]
+[<tf.Tensor 'model_outputs:0' shape=(1, 29) dtype=float32>]
+
+tensorflow.python.framework.errors_impl.InvalidArgumentError: cannot compute __inference_pruned_816 as input #0(zero-based) was expected to be a float tensor but is a uint8 tensor [Op:__inference_pruned_816]
+tensorflow.python.framework.errors_impl.InvalidArgumentError:  The first dimension of paddings must be the rank of inputs[4,2] [224,224,3][[node conv0/pad_size (defined at /usr/local/lib/python3.6/dist-packages/tensorflow_core/python/framework/ops.py:1751) ]] [Op:__inference_pruned_816]
+TypeError: Expected tensor with type tf.float32 not tf.uint8
+
