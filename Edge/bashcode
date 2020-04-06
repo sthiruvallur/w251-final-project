@@ -2,6 +2,7 @@ sudo docker stop hd
 sudo docker rm hd
 sudo docker build -t project -f Dockerfile.keras .
 sudo docker rmi $(sudo docker images -f "dangling=true" -q)
+xhost +
 
 # Don't use this one for now, more for jupyter stuff later
 sudo docker run -d --name hd -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --privileged -device=/dev/video0:/dev/video0 -p 8888:8888 project
@@ -9,7 +10,8 @@ sudo docker run -d --name hd -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLA
 # Use these two
 sudo docker run -it --rm --name hd -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=$DISPLAY --privileged -device=/dev/video0:/dev/video0 -v /data/project/hands:/tmp/hands -p 8888:8888 project
 sudo docker exec -it hd bash
-
+# Within docker
+python3 hand_detect_pb_v4.py
 
 # Debugging Related
 [<tf.Tensor 'Placeholder:0' shape=(None, 224, 224, 3) dtype=float32>]

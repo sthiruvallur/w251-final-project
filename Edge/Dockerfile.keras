@@ -9,6 +9,7 @@ RUN apt update
 RUN apt install -y curl git python3-opencv python3-pip vim-tiny libopencv-dev python3-matplotlib python3-pil libcanberra-gtk-module
 
 RUN pip3 install jupyter
+RUN pip3 install gTTS
 
 # ENV DEBIAN_FRONTEND=noninteractive
 RUN apt install -y python3-sklearn python3-scipy python3-pandas python3-seaborn
@@ -17,7 +18,7 @@ RUN pip3 install keras
 WORKDIR /
 RUN mkdir -p notebooks
 WORKDIR /
-COPY handcapture.py .
+COPY hand_detect_pb_v4.py .
 RUN mkdir -p SavedModel
 COPY SavedModel/ /SavedModel/
 
