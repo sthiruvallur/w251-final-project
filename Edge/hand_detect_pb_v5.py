@@ -52,6 +52,10 @@ PATH_TO_FROZEN_GRAPH = './saved_model'
 detection_graph = tf.saved_model.load(PATH_TO_FROZEN_GRAPH)
 infer = detection_graph.signatures["serving_default"]
 
+# set the directory for mp3 saving
+DIR = r'/tmp/hands'
+os.chdir(DIR)
+
 # parameters
 cap_region_x_begin = 0.5  # start point/total width
 cap_region_y_end = 0.8  # start point/total width
