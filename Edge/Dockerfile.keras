@@ -18,9 +18,13 @@ RUN pip3 install keras
 WORKDIR /
 RUN mkdir -p notebooks
 WORKDIR /
-COPY hand_detect_pb_v4.py .
+COPY hand_detect_pb_v5.py .
+COPY hand_detect_vgg16_pb.py .
 RUN mkdir -p SavedModel
-COPY SavedModel/ /SavedModel/
+COPY SavedModel/ /saved_model/
+# The below saved model directory is needed for vgg16 hand detection
+# the saved model should be downloaded from berkeley drive to copied in 
+#COPY vgg16_model/ /vgg16_model/
 
 EXPOSE 8888
 
