@@ -3,7 +3,22 @@ Code for the final project
 
 
 ## Edge
-To run the edge code, please follow the bash code here: https://github.com/sthiruvallur/w251-final-project/blob/develop/Edge/bashcode
+
+To build docker image for Jetson
+
+`./Edge/build_docker_image.sh`
+
+To run the docker container 
+
+`./Edge/run_container.sh`
+
+Once inside the container, run the hand capture and predict image by
+
+`python3 hand_detect_pb.py`
+
+Supplemental information on other options with the container will be found in
+
+./Edge/bashcode
 
 ## Cloud
 
