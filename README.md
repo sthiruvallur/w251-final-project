@@ -6,15 +6,15 @@ Code for the final project
 
 To build docker image for Jetson
 
-./Edge/build_docker_image.sh
+`./Edge/build_docker_image.sh`
 
 To run the docker container 
 
-./Edge/run_container.sh
+`./Edge/run_container.sh`
 
 Once inside the container, run the hand capture and predict image by
 
-python3 hand_detect_pb.py
+`python3 hand_detect_pb.py`
 
 Supplemental information on other options with the container will be found in
 
